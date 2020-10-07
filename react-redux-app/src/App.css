@@ -1,0 +1,78 @@
+.App {
+  text-align: center;
+  background-color: aliceblue;
+  margin-top:2rem;
+}
+.line{
+  margin-top:20px;
+  height:2px;
+  background-color: black;
+}
+.title{
+  
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;
+  font-variant: normal;
+  font-weight: bolder;
+  font-size: xx-large; 
+}
+
+.label{
+  font-size:30px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.background{
+  background-color: aliceblue;
+}
+
+.input{
+  width:10cm;
+  text-align: center;
+  height:30px
+}
+
+.submit{ 
+  width: 15ch;
+  margin-left:20px;
+  height:40px;
+  background-color: darkgreen;
+  font-style: bold;
+
+}
+
+.edit{
+  height:40px;
+  margin-left:20px;
+  width:15ch;
+  background-color:yellow;
+  font-style: bold;
+}
+
+.delete{
+  margin-left: 20px;
+  height: 40px;
+  width:15ch;
+  background-color: tomato;
+  font-style: bold;
+}
+
+.getdata{
+  margin-left:18px;
+  margin-top: 10px;
+  width:15ch;
+  height:40px;
+  background-color:rgb(214, 221, 109);
+  font-style: bold;
+}
+.list{
+  margin-left:11cm;
+  margin-top: 2px;
+  width:30ch;
+  text-align:center;
+  border: 0.5px solid;
+}
+ .table{
+   border:2px solid black
+ }
+ .tr{
+   border:1px solid black
+ }
