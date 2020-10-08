@@ -1,8 +1,8 @@
-import {CREATE_DATA,UPDATE_DATA,DELETE_DATA,GET_DATA, GET_TO_UPDATE} from '../constants/action-types';
+import {CREATE_DATA,UPDATE_DATA,DELETE_DATA,GET_DATA, GET_TO_UPDATE, INPUT_DATA} from '../constants/action-types';
 
 
 const initialState = {
-    users:[],getupdate:[]
+    users:[],getupdate:[],inputData:''
 }
 
 const formReducers = (state = initialState,action)=>{
@@ -11,6 +11,11 @@ const formReducers = (state = initialState,action)=>{
             return {
                 users:action.payload
                   }
+        case INPUT_DATA:
+            return{
+                ...state,
+                inputData:action.payload
+                    }
         case CREATE_DATA :
             return {
                 ...state

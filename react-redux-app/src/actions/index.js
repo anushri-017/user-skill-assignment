@@ -1,6 +1,6 @@
 
 import axios from 'axios';
-import { CREATE_DATA, GET_TO_UPDATE, UPDATE_DATA, DELETE_DATA, GET_DATA } from '../constants/action-types'
+import { CREATE_DATA, GET_TO_UPDATE, UPDATE_DATA, DELETE_DATA, GET_DATA, INPUT_DATA } from '../constants/action-types'
 
 
 const create = () => {
@@ -33,6 +33,12 @@ const Update = () => {
     return {
         type: UPDATE_DATA
         
+    }
+}
+export const stateData = (data) =>{
+    return{
+        type:INPUT_DATA,
+        payload:data
     }
 }
 
