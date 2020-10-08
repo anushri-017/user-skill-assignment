@@ -1,15 +1,16 @@
 
 import axios from 'axios';
-import { CREATE_DATA, GET_TO_UPDATE, UPDATE_DATA, DELETE_DATA, GET_DATA } from '../constants/action-types'
+import { CREATE_DATA, GET_TO_UPDATE, UPDATE_DATA, DELETE_DATA, GET_DATA,GET_UPDATE } from '../constants/action-types'
 
 
 const create = () => {
+    console.log('heyyy')
     return {
         type: CREATE_DATA
     }
 }
 
-const getupdate = (data) => {
+const getupdate = (data) => {   
     console.log(data)
     return {
         type: GET_TO_UPDATE,
@@ -18,6 +19,7 @@ const getupdate = (data) => {
 }
 
 const get=(data)=> {
+    console.log(data)
     return {
         type: GET_DATA,
         payload: data
@@ -35,7 +37,12 @@ const Update = () => {
         
     }
 }
-
+export  const stateData = (data) => {
+     return{
+         type:GET_UPDATE,
+         payload:data
+     }
+ }
 
 export function createData(data) {
     console.log("Posting data on Database")
@@ -64,7 +71,7 @@ export function updatedata(id) {
 export function editUser(id) {
     console.log('getting data from editUser function of id :'+(id))
     return function (dispatch) {
-        fetch("http://localhost:4000/gettoupdate/"+id,{method:"GET", mode:'CORS'})
+        fetch("http://localhost:4000/gettoupdate/"+id,{method:"GET"})
             .then((response) => response.json())
             .then(data => dispatch(getupdate(data)))
             /*.then ((data) => (console.log(data))*/     
