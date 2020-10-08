@@ -3,6 +3,7 @@ import {BrowserRouter,Link,Route,Switch} from 'react-router-dom';
 import {createData} from './actions/index';
 import {connect} from 'react-redux';
 import ShowData from "./showData";
+import {stateData} from './actions/index';
 
 
 class Userform extends Component {
@@ -16,21 +17,29 @@ class Userform extends Component {
             skills: ''
         }
     }
-    handleinputid = event => {
-        this.setState({ userid: event.target.value })
-    }
-    handlefullname = event => {
-        this.setState({ fullname: event.target.value })
-    }
-    handleinputphone = event => {
-        this.setState({ phone: event.target.value })
-    }
-    handleinputemail = event => {
-        this.setState({ email: event.target.value })
-    }
-    handleinputskill = event => {
-        this.setState({ skills: event.target.value })
-    }
+    //handling on change events
+        handleinputid = event => {
+            this.setState({ userid: event.target.value })
+            stateData(inputdata);
+        }
+        handlefullname = event => {
+            this.setState({fullname: event.target.value })
+            stateData(inputdata);
+            }
+        handleinputphone = event => {
+            this.setState({ phone: event.target.value })
+            stateData(inputdata);
+            }
+        handleinputemail = event => {
+            this.setState({email: event.target.value })
+            stateData(inputdata);
+            }
+        handleinputskill = event => {
+            this.setState({skills: event.target.value })
+            stateData(inputdata);
+        }
+
+    //handling submit 
     handlesubmit = e => {
         e.preventDefault();
         if (this.state.userid === '' || this.state.fullname === '' ||
@@ -49,15 +58,15 @@ class Userform extends Component {
                     <div className = "form-group">        
                         <h1 className='text-light bg-info'>SUBMIT USER DETAILS</h1><hr className='line' /> 
                         <label className='text-success text-uppercase font-weight-bold label'>User ID:</label>
-                        <input className='input form-control border-dark font-weight-italic' type='number' value={this.props.userid} onChange={this.handleinputid} placeholder = "Enter your Userid" required /><br/>
+                        <input className='input form-control border-dark font-weight-italic' type='number' value={this.props.inputdata.userid} onChange={this.handleinputid} placeholder = "Enter your Userid" required /><br/>
                         <label className='text-success text-uppercase font-weight-bold label' >Full Name:</label>
-                        <input className='input form-control border-dark font-weight-italic' value={this.props.fullname} onChange={this.handlefullname} placeholder = "Enter your fullName " type='text' required /><br/>
+                        <input className='input form-control border-dark font-weight-italic' value={this.props.inputdata.fullname} onChange={this.handlefullname} placeholder = "Enter your fullName " type='text' required /><br/>
                         <label className='text-success text-uppercase font-weight-bold label'>Phone:</label>
-                        <input className='input form-control border-dark font-weight-italic' value={this.props.phone}  onChange={this.handleinputphone} placeholder = "Enter your Phone" type='number' required /><br/>
+                        <input className='input form-control border-dark font-weight-italic' value={this.props.inputdata.phone}  onChange={this.handleinputphone} placeholder = "Enter your Phone" type='number' required /><br/>
                         <label className='text-success text-uppercase font-weight-bold label'>E-Mail ID:</label>
-                        <input className='input form-control border-dark font-weight-italic' value={this.props.email} onChange={this.handleinputemail} placeholder = "Enter your Email-id" type='text' required /><br/>
+                        <input className='input form-control border-dark font-weight-italic' value={this.props.inputdata.email} onChange={this.handleinputemail} placeholder = "Enter your Email-id" type='text' required /><br/>
                         <label className='text-success text-uppercase font-weight-bold label'>Skills:</label>
-                        <input className='input form-control border-dark font-weight-italic' value={this.props.skills} onChange={this.handleinputskill} placeholder = "Enter your Skills" type='text' required /><br/>
+                        <input className='input form-control border-dark font-weight-italic' value={this.props.inputdata.skills} onChange={this.handleinputskill} placeholder = "Enter your Skills" type='text' required /><br/>
                         <button className='bn btn-primary' onClick={this.handlesubmit}>SUBMIT</button>
                         <br/>
                     </div>
@@ -87,8 +96,8 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
     return{
-        users:state.users,
-        getupdate:state.getupdate
+        users:state.users
+        
     }
 }
 
