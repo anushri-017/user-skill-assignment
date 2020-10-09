@@ -2,14 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import thunk from 'redux-thunk'
+import thunk from 'redux-thunk';
+import logger from 'redux-logger';
 import {createStore,applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import formReducers from './reducers/FormReducers';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 
 
-const store = createStore(formReducers,applyMiddleware(thunk));
+const store = createStore(formReducers,applyMiddleware(thunk, logger));
 
 
 ReactDOM.render(

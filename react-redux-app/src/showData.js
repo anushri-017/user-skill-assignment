@@ -1,13 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getdata, deletedata, updatedata, editUser } from './actions/index';
-
-
+import { getdata, deletedata} from './actions/index';
+import{BrowserRouter,Route,Switch,Link} from 'react-router-dom';
+import EditUser from './editUser';
 
 const mapStateToProps = state => {
     return {
-        users: state.users,
-        getupdate: state.getupdate
+        users: state.users
     }
 };
 
@@ -15,34 +14,25 @@ const mapDispatchToProps = dispatch => {
     return {
         getdata: () => dispatch(getdata()),
         deletedata: (id) => dispatch(deletedata(id)),
-        updatedata: (id) => dispatch(updatedata(id)),
-        editUser: (id) => dispatch(editUser(id))
+       
     }
 }
 class ShowData extends React.Component {
 
     componentDidMount() {
         this.props.getdata();
-
     }
 
     deleteUser = (userid) => {
         this.props.deletedata(userid)
     }
-
-    updateUser = (userid) => {
-        this.props.updatedata(userid)
-    }
-    editUser = (userid) => {
-        this.props.editUser(userid)
-    }
-
+   
     render() {
         console.log(this.props.users)
         return (
             <>
                 <div>
-                    <label>USER_DATA</label>
+                    <h2><b>USER_DATA</b></h2>
                     <table className='table '>
                         <thead>
                             <tr>
@@ -62,9 +52,15 @@ class ShowData extends React.Component {
                                     <td className="tr">{users.email}</td>
                                     <td>
                                         <button className="btn btn-danger ml-2 py-1" onClick={() => { this.deleteUser(users.userid) }}>DELETE </button>
-                                        <button className="btn btn-warning ml-2 py-1" onClick={() => { this.updateUser(users.userid) }}>UPDATE</button>
-                                        <button className="btn btn-info ml-2 py-1" onClick={() => { this.editUser(users.userid) }}>EDIT</button>
-                                    </td>
+                                        <BrowserRouter>
+                                        <button className ='btn btn-warning ml-2 py-1'> 
+                                        <Link to = '/editUser' target className = "text-white">Edit</Link>
+                                        </button>
+                                       <Switch>
+                                        <Route exact path = '/editUser' component = {EditUser}/>
+                                        </Switch>
+                                        </BrowserRouter>
+                                        </td>
                                 </tr>
                             ))}
                         </tbody>

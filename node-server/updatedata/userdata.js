@@ -5,7 +5,7 @@ const user = require('../schema');
 
 router.put('/:id',function(req,res){
     console.log('Updating User Data....!!!')
-    user.db1.updateOne( {userid:req.params.id},
+    user.db1.updateOne( {userid:req.params.id && ''},
         {$set:{
             userid:req.body.userid,
             fullname:req.body.fullname,

@@ -6,7 +6,7 @@ const router = express.Router();
 
     router.delete('/:id',function(req,res){
         console.log("deleting users data..");
-        user.db1.deleteOne({userid:req.params.id},function(err){ 
+        user.db1.deleteOne({userid:req.params.id && ''},function(err){ 
             console.log(`data having id ${req.params.id} is now delete`)
         })        
     })

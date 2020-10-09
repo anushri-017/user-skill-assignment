@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
 app.use(cors())
 
-app.post('/',function(req,res){
+app.post('/postdata',function(req,res){
     res.send('posting request');
     console.log(req.body)
     console.log(database.db(req.body))
