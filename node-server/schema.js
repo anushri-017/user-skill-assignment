@@ -7,15 +7,15 @@ db.once('open',function(){
 });
 
 const userSchema = new mongoose.Schema({
-    userid:Number,
-    fullname:String,
-    phone:Number,
-    email:String,
+    userid:{type:Number},
+    fullname:{type:String},
+    phone:{type:Number},
+    email:{type:String},
         
 })
 const skillSchema = new mongoose.Schema({
-    skilluserid:Number,
-    skills:String,
+    userid:{type:Number},
+    skills:{type:String},
 })
 const users = mongoose.model('users',userSchema);
 const skills = mongoose.model('skills',skillSchema);

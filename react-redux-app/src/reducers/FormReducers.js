@@ -1,34 +1,41 @@
-import {CREATE_DATA,UPDATE_DATA,DELETE_DATA,GET_DATA} from '../constants/action-types';
+import { CREATE_DATA, UPDATE_DATA, DELETE_DATA, GET_DATA, GET_TO_UPDATE, CREATE_TAGS } from '../constants/action-types';
 
 
 const initialState = {
-    users:[]
+    users:[],getToUpdate:{userid:'',fullname:'',phone:'',email:''},tags:[]
 }
-
-const formReducers = (state = initialState,action)=>{
-    switch (action.type){
-        case GET_DATA :
+const formReducers = (state = initialState, action) => {
+    switch (action.type) {
+        case GET_DATA:
             return {
                 ...state,
                 users:action.payload
-                  }
-        
-        case CREATE_DATA :
+            }
+        case CREATE_TAGS:
+            return{
+                ...state
+            }
+        case CREATE_DATA:
             return {
                 ...state
             }
-        case UPDATE_DATA :
+        case GET_TO_UPDATE:{
             return{
                 ...state,
-                users:action.payload
+                getToUpdate:action.payload
+            }
+        }
+        case UPDATE_DATA:
+            return {
+                ...state,
+                users: action.payload
             }
         case DELETE_DATA:
-             return {
-                 ...state, 
-             } 
-         default:
-             return state;
-
+            return {
+                ...state
+            }
+        default:
+            return state;
     }
 };
 

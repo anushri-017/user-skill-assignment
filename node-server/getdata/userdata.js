@@ -1,26 +1,23 @@
 const  express = require('express');
 const mongoose = require('mongoose');
+const { db1 } = require('../schema');
 const user = require('../schema');
 const router = express.Router();
  
 router.get('/',function(req,res){
-    //console.log('getting users data');
-    //user.db1.find({},function(err, data){
-        //if (err) throw err
-        //res.send(data)
-    //});
-
+    
     user.db1.aggregate([
     {
         $lookup:
         {
             from:'db2',
             localField:'userid',
-            foreignField:'skilluserid',
-            as:'userDetails'
+            foreignField:'userid',
+            as:'user_Details'
         }
     }
-    ],function(err,data){
+
+    ]).exec(function(err,data){
         if (err) throw err
         console.log("getting user data from database")
         res.send(data)
@@ -28,4 +25,3 @@ router.get('/',function(req,res){
 });
 
 module.exports = router;
-

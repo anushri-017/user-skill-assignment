@@ -6,9 +6,9 @@ const { ObjectID } = require('mongodb');
 
 router.put('/:id',function(req,res){
     console.log('Updating Skills Data....!!!')
-    skill.db2.findOneAndUpdate(req.params.id,
+    skill.db2.UpdateOne(req.params.id,
         {$set:{
-            skilluserid:req.body.skillsuserid,
+            userid:req.body.userid,
             skills:req.body.skills
         }},function(err,data){
             if(err) throw err 

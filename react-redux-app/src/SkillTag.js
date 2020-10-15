@@ -1,49 +1,71 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import ReactTags from 'react-tag-autocomplete'
+import './App.css';
 
 class SkillTags extends React.Component {
-    constructor(props) {
-        super(props)
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            tags: [
-                { id: 1, name: "Painiting" },
+    this.state = {
+      tags: []
+    };
+  }
 
-            ],
-            suggestions: [
-                { id: 2, name: "Sketching" },
-                { id: 3, name: "Writing" },
-                { id: 4, name: "React" },
-                { id: 5, name: "FootBall" },
-                { id: 6, name: "Cricket" }
-            ]
-        }
+  removeTag = (i) => {
+    const newTags = [...this.state.tags];
+    newTags.splice(i, 1);
+    this.setState({ tags: newTags });
+  }
 
-        this.reactTags = React.createRef()
+  inputKeyDown = (e) => {
+    const val = e.target.value;
+    if (e.key === 'Shift' && val) {
+      if (this.state.tags.find(tag => tag.toLowerCase() === val.toLowerCase())) {
+        return;
+      }
+      this.setState({ tags: [...this.state.tags, val] });
+      this.tagInput.value = null;
+    } else if (e.key === 'Backspace' && !val) {
+      this.removeTag(this.state.tags.length - 1);
     }
+  }
+  handletags = e =>{
+    e.preventDefault();
+    if(this.state.tags ==="")
+    console.log(this.state)
+    this.props.createtag(this.state)
+  }
+ handletagsinput =event =>{
+   this.setState({tags:event.target.value})
+ }
 
-    onDelete(i) {
-        const tags = this.state.tags.slice(0)
-        tags.splice(i, 1)
-        this.setState({ tags })
-    }
+  render() {
+    const { tags } = this.state;
 
-    onAddition(tag) {
-        const tags = [].concat(this.state.tags, tag)
-        this.setState({ tags })
-    }
-
-    render() {
-        return (
-            <ReactTags
-                ref={this.reactTags}
-                tags={this.state.tags}
-                suggestions={this.state.suggestions}
-                onDelete={this.onDelete.bind(this)}
-                onAddition={this.onAddition.bind(this)} />
-        )
-    }
+    return (
+      <>
+        <div className="input-tag border border-dark rounded font-weight-italic">
+          <ul className="input-tag__tags">
+            {tags.map((tag, i) => (
+              <li key={tag}>
+                {tag}
+                <button type="button" onClick={() => { this.removeTag(i); }}>+</button>
+              </li>
+            ))}
+            <li className=" border-dark input-tag__tags__input">
+            <input className='border-dark font-weight-italic skill-input'
+              placeholder="Enter your Skills" 
+              type="text" 
+              onChange={this.handletagsinput}
+              onKeyDown={this.inputKeyDown} 
+              ref={c => { this.tagInput = c; }} />
+              </li>
+          </ul>
+          <button onClick ={this.handletags}>Done</button>
+        </div>
+      </>
+    )
+  }
 }
+
 
 export default SkillTags;

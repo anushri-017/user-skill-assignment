@@ -4,17 +4,19 @@ const router = express.Router();
 const user = require('../schema');
 
 router.put('/:id',function(req,res){
-    console.log('Updating User Data....!!!')
-    user.db1.updateOne( {userid:req.params.id && ''},
+   
+    user.db1.updateOne({userid:req.params.id},
         {$set:{
             userid:req.body.userid,
             fullname:req.body.fullname,
             phone:req.body.phone,
             email:req.body.email 
-        }},function(err){
+        }},function(err,data){
             if(err) throw err 
-            res.send("Record has been updated..!")
+            console.log('Updating User Data....!!!')
+            res.send(data)
         })
 })
 
  module.exports = router;
+ 

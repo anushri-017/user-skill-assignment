@@ -7,7 +7,7 @@ const router = express.Router();
     router.delete('/:id',function(req,res){
         console.log('deleting user data');
         if(req.params.id){
-            skill.db2.findByIdAndDelete(req.params.id,function(err,data){
+            skill.db2.DeleteOne(req.params.id,function(err,data){
                 res.send(data)
             })
         }
