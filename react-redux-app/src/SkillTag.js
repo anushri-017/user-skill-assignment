@@ -1,5 +1,7 @@
 import React from 'react'
 import './App.css';
+import { connect } from 'react-redux';
+import { createtag } from '../src/actions/index';
 
 class SkillTags extends React.Component {
   constructor(props) {
@@ -28,15 +30,15 @@ class SkillTags extends React.Component {
       this.removeTag(this.state.tags.length - 1);
     }
   }
-  handletags = e =>{
-    e.preventDefault();
-    if(this.state.tags ==="")
-    console.log(this.state)
-    this.props.createtag(this.state)
-  }
- handletagsinput =event =>{
-   this.setState({tags:event.target.value})
- }
+  // handletags = e => {
+  //   e.preventDefault();
+  //   if (this.state.tags === "")
+  //     console.log(this.state)
+  //   this.props.createtag(this.state)
+  // }
+  // handletagsinput = event => {
+  //   this.setState({ tags: event.target.value })
+  // }
 
   render() {
     const { tags } = this.state;
@@ -52,20 +54,33 @@ class SkillTags extends React.Component {
               </li>
             ))}
             <li className=" border-dark input-tag__tags__input">
-            <input className='border-dark font-weight-italic skill-input'
-              placeholder="Enter your Skills" 
-              type="text" 
-              onChange={this.handletagsinput}
-              onKeyDown={this.inputKeyDown} 
-              ref={c => { this.tagInput = c; }} />
-              </li>
+              <input className='border-dark font-weight-italic skill-input'
+                placeholder="Enter your Skills"
+                type="text"
+                onChange={this.handletagsinput}
+                onKeyDown={this.inputKeyDown}
+                ref={c => { this.tagInput = c; }} />
+            </li>
           </ul>
-          <button onClick ={this.handletags}>Done</button>
+          <button className="done" onClick={this.handletags}>Done</button>
         </div>
       </>
     )
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    tags: state.tags
+  }
+}
 
-export default SkillTags;
+const mapDispatchToProps = dispatch => {
+  return {
+    createtag: (data) => dispatch(createtag(data))
+  }
+
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(SkillTags);

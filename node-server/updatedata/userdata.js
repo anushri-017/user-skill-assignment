@@ -13,10 +13,11 @@ router.put('/:id',function(req,res){
             email:req.body.email 
         }},function(err,data){
             if(err) throw err 
-            console.log('Updating User Data....!!!')
+            console.log('Updating User Data....')
             res.send(data)
         })
 })
 
- module.exports = router;
+
+module.exports = router;
  

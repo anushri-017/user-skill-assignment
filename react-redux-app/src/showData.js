@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getdata, deletedata,editData } from './actions/index';
-import EditUser from './EditUserData';
-import {Link,Switch,Route} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 
 const mapStateToProps = state => {
@@ -15,8 +14,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         getdata: () => dispatch(getdata()),
-        deletedata: (id) => dispatch(deletedata(id)),
-        editData: (id) => dispatch(editData(id))
+        deletedata: (userid) => dispatch(deletedata(userid)),
+        editData: (userid) => dispatch(editData(userid))
     }
 }
 
@@ -27,12 +26,12 @@ class ShowData extends React.Component {
     }
 
     deleteUser = (userid) => {
+      alert('Are you Sure, you want to delete user ?')
         console.log(userid)
         this.props.deletedata(userid)
     }
 
     editUser = (userid) => {
-        debugger
         console.log(userid)
         this.props.editData(userid)
     }
@@ -64,7 +63,9 @@ class ShowData extends React.Component {
                                     <td className="tr">{users.email}</td>
                                     <td>
                                         <button className="btn btn-danger ml-2 py-1" onClick={() => { this.deleteUser(users.userid) }}>DELETE </button>
-                                        <button className='btn btn-warning ml-2 py-1' onClick={() => { this.editUser(users.userid)}}>EDIT</button>
+                                        <button className='btn btn-warning ml-2 py-1' onClick={() => { this.editUser(users.userid)}}>
+                                          <Link to = '/editUser'>EDIT</Link>
+                                          </button>
                                     </td>
                                 </tr>
                             ))}

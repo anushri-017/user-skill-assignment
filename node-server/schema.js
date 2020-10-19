@@ -15,7 +15,7 @@ const userSchema = new mongoose.Schema({
 })
 const skillSchema = new mongoose.Schema({
     userid:{type:Number},
-    skills:{type:String},
+    skills:[],
 })
 const users = mongoose.model('users',userSchema);
 const skills = mongoose.model('skills',skillSchema);

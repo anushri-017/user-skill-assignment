@@ -20,10 +20,10 @@ const get = (data) => {
     }
 }
 
-const Update = (data) => {
+const Update = (dataa) => {
     return {
         type: UPDATE_DATA,
-        payload: data
+        payload: dataa
     }
 }
 
@@ -32,6 +32,7 @@ const Delete = () => {
         type: DELETE_DATA
     }
 }
+
 
 const getToUpdate = (data) => {
     console.log(data)
@@ -45,14 +46,16 @@ export function createData(data) {
     console.log("Posting data on Database")
     return function (dispatch) {
         axios.post("http://localhost:4000/postdata", data)
-        dispatch(create())
+        dispatch(create()) 
     }
 }
+
 export function createtag(data) {
     console.log("Posting data on Database")
     return function (dispatch) {
         axios.post("http://localhost:4000/postdata", data)
         dispatch(createtags())
+      
     }
 }
 
@@ -66,29 +69,30 @@ export function getdata() {
 }
 
 export function updatedata(data) {
-    console.log("updating data of id :" + (data))
+    console.log(data)
     return function (dispatch) {
-        axios.put(`http://localhost:4000/updateuserdata/${data.userid}`)
+        axios.put(`http://localhost:4000/updateuserdata/${data.userid}`,data)
             .then(res => {
-                const data = res.data;
-                dispatch(Update(data))
+                const  dataa= res.dataa;
+                dispatch(Update(dataa))
             })
     }
 }
 
-export function deletedata(id) {
-    console.log('deleting data of id :' + (id))
-    return async function (dispatch) {
-        await fetch(`http://localhost:4000/deleteuserdata/${id}`, { method: "DELETE" })
+
+export function deletedata(userid) {
+    console.log('deleting data of id :' + (userid))
+    return  function (dispatch) {
+         fetch(`http://localhost:4000/deleteuserdata/${userid}`, { method: "DELETE" })
         dispatch(Delete())
     }
 }
 
 
-export function editData(id) {
-    console.log('getting id from editData function: ' + (id))
+export function editData(userid) {
+    console.log('getting id from editData function: ' + (userid))
     return function (dispatch) {
-        fetch(`http://localhost:4000/gettoupdate/` + (id))
+        fetch(`http://localhost:4000/gettoupdate/${userid}`)
             .then((response) => response.json())
             .then(data => dispatch(getToUpdate(data)))
     }

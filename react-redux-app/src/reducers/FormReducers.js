@@ -2,7 +2,7 @@ import { CREATE_DATA, UPDATE_DATA, DELETE_DATA, GET_DATA, GET_TO_UPDATE, CREATE_
 
 
 const initialState = {
-    users:[],getToUpdate:{userid:'',fullname:'',phone:'',email:''},tags:[]
+    users:[],getToUpdate:[{userid:'',fullname:'',phone:'',email:''}],tags:[]
 }
 const formReducers = (state = initialState, action) => {
     switch (action.type) {
@@ -25,11 +25,23 @@ const formReducers = (state = initialState, action) => {
                 getToUpdate:action.payload
             }
         }
+        // case UPDATE_DATA:
+        //     return (state.map((data) =>{
+        //         if(data.userid === action.payload.userid){
+        //             return{
+        //                 ...data,
+        //                 userid:action.payload.userid,
+        //                 fullname:action.payload.fullname,
+        //                 phone:action.payload.phone,
+        //                 email:action.payload.email
+        //             }
+        //         }else return data;
+        //     }))
         case UPDATE_DATA:
             return {
                 ...state,
-                users: action.payload
-            }
+                users:action.payload
+                        }
         case DELETE_DATA:
             return {
                 ...state

@@ -144,7 +144,14 @@
   height:4ch;
 }
 
+
 .done{
-  margin-bottom:20px;
-  margin-left:27rem;
+align-items: center;
+appearance: none;
+cursor: pointer;
+justify-content: center;
+margin-left: 8px;
+padding: 0;
+
 }
+

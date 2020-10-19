@@ -9,6 +9,7 @@ function connectdb(arg) {
         phone: arg.phone,
         email: arg.email
     })
+    
     console.log(skills.db2)
     const skilldata = new skills.db2({
         userid: arg.userid,
